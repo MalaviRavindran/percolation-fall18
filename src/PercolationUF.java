@@ -28,7 +28,7 @@ public class PercolationUF implements IPercolate{
 
 	public void open(int row, int col) {
 		if (!inBounds(row,col)) {
-			throw new IllegalArgumentException("cell out of bounds");
+			throw new IndexOutOfBoundsException("cell out of bounds");
 		}
 		int cell = row*myGrid.length + col;
 		if (! isOpen(row, col)) {
@@ -66,7 +66,7 @@ public class PercolationUF implements IPercolate{
 	@Override
 	public boolean isOpen(int row, int col) {
 		if (!inBounds(row,col)) {
-			throw new IllegalArgumentException("cell out of bounds");
+			throw new IndexOutOfBoundsException("cell out of bounds");
 		}
 		return myGrid[row][col];
 		
@@ -76,7 +76,7 @@ public class PercolationUF implements IPercolate{
 	public boolean isFull(int row, int col) {
 		//checks if the (row,col) cell is connected to VTOP.
 		if (!inBounds(row,col)) {
-			throw new IllegalArgumentException("cell out of bounds");
+			throw new IndexOutOfBoundsException("cell out of bounds");
 		}
 		int cell =  (row*myGrid.length) + col;
 		return myFinder.connected(VTOP,cell);
