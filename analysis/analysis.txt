@@ -1,22 +1,83 @@
-Your name
-Your netid
-
-Copy/Paste results from PercolationStats using PercolationDFS
-
+Malavi Ravindran
+mr328
 
 Copy/Paste results from PercolationStats using PercolationDFSFast
+
+simulation data for 20 trials
+grid	mean	stddev	time
+100	   0.593	0.014	0.362
+200	   0.591	0.010	0.172
+400	   0.590	0.006	0.842
+800	   0.594	0.004	6.188
 
 
 Copy/Paste results from PercolationStats using PercolationBFS
 
+simulation data for 20 trials
+grid	mean	stddev	time
+100	   0.593	0.014	0.162
+200	   0.591	0.010	0.160
+400	   0.590	0.006	0.847
+800	   0.594	0.004	5.499
+1600   0.592	0.002	37.458
 
 Copy/Paste results from PercolationStats using PercolationUF 
 with the QuickUWPC UnionFind implementation.
 
-1. How does doubling the grid size affect running time (keeping # trials fixed)
+simulation data for 20 trials
+grid	mean	stddev	time
+100	   0.593	0.014	0.108
+200	   0.591	0.010	0.146
+400	   0.590	0.006	1.003
+800	   0.594	0.004	7.741
+1600   0.592	0.002	33.137
 
+1. How does doubling the grid size affect running time (keeping # trials fixed)
+Keeping the number of trials fixed, we see that doubling grid size roughly multiplied
+the runtime by somewhere around 5-7. For example, in DFSFast, going from a grid of 200 to 400,
+time increased by a multiplicative factor of 4.89 (.842/.172). In BFS, going from a grid of 400 to 800,
+time increased by a multiplicative factor of 6.5 (5.499/0.847). In UF, going from a grid of 400 to 800, time 
+increased by a multiplicative factor of 7.72 (7.741/1.003).
 
 2. How does doubling the number of trials affect running time.
 
+DFSFast
+simulation data for 40 trials
+grid	mean	stddev	time
+100	   0.594	0.015	0.218
+200	   0.591	0.009	0.236
+400	   0.591	0.005	1.595
+800	   0.593	0.004	12.686
+
+BFS
+simulation data for 40 trials
+grid	mean	stddev	time
+100	   0.594	0.015	0.187
+200	   0.591	0.009	0.593
+400	   0.591	0.005	1.848
+800	   0.593	0.004	11.025
+
+UF
+simulation data for 40 trials
+grid	mean	stddev	time
+100	   0.594	0.015	0.260
+200	   0.591	0.009	0.426
+400	   0.591	0.005	1.783
+800	   0.593	0.004	14.359
+1600   0.593	0.002	79.786
+
+If we double the number of trials from 20 to 40, we roughly double the runtime. For example, in DFSFast, 
+20 trials for a grid size of 800 took 6.188 seconds, while 40 trials of the same grid size took 12.686.
+This is roughly double the time. Similarly, in BFS, 20 trials of grid size 800 took 5.499 seconds. 40 trials
+of the same grid size took 11.025 seconds, roughly double. Finally, in UF, 20 trials of grid size
+800 took 7.741 seconds. For 40 trials, this took 14.359 seconds, roughly double. 
 
 3. Estimate the largest grid size you can run in 24 hours with 20 trials. Explain your reasoning.
+
+We can set up the following equation:
+
+time (in seconds) = 0.108*5^n, where n is the number of times 5 is multiplied and 0.108 represents
+the time when the grid size is 100. Substituting 86400 for time, we get that n = 8.4454124646. So,
+we will round down to 8 and say that 5 is multiplied 8 times to get from the time of 0.108 to
+a time of 24 hours. If 5 is multiplied 8 times, then the initial grid size of 100 is 
+multiplied by 2^8 = 256. So, the grid size we could run in 24 hours is roughly 25,600. 
